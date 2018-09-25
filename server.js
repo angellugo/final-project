@@ -2,6 +2,10 @@ const express = require("express");
 const path = require("path");
 const PORT = process.env.PORT || 3001;
 const app = express();
+var mongoose = require("mongoose");
+
+var db = require("./models");
+mongoose.connect("mongodb://localhost/project3LocalDB");
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
@@ -17,3 +21,8 @@ app.get("*", function(req, res) {
 app.listen(PORT, function() {
   console.log(`🌎 ==> Server now on port ${PORT}!`);
 });
+
+db.Test.create({ testData: "akfgkjanksd" });
+
+
+

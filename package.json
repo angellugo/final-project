@@ -16,11 +16,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "concurrently": "^3.5.0",
+    "concurrently": "^3.6.1",
     "nodemon": "^1.11.0"
   },
   "dependencies": {
     "express": "^4.15.4",
-    "if-env": "^1.0.4"
+    "if-env": "^1.0.4",
+    "mongoose": "^5.2.17"
   }
 }
