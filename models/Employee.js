@@ -23,7 +23,7 @@ const EmployeeSchema = new Schema({
 });
 
 // This creates our model from the above schema, using mongoose's model method
-const Employee = mongoose.model('Test', EmployeeSchema);
+const Employee = mongoose.model('Employee', EmployeeSchema);
 
 // Export the Article model
 module.exports = Employee;

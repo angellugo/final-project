@@ -25,13 +25,13 @@ module.exports = {
   },
   clockIn: function(req, res) {
     db.Employee
-        .findOneAndUpdate({_id: req.params.id}, {$push: {clockIn: Date.now}})
+        .findOneAndUpdate({_id: req.params.id}, {$push: {clockIn: Date.now()}})
         .then((dbModel) => res.json(dbModel))
         .catch((err) => res.status(422).json(err));
   },
   clockOut: function(req, res) {
     db.Employee
-        .findOneAndUpdate({_id: req.params.id}, {$push: {clockOut: Date.now}})
+        .findOneAndUpdate({_id: req.params.id}, {$push: {clockOut: Date.now()}})
         .then((dbModel) => res.json(dbModel))
         .catch((err) => res.status(422).json(err));
   },
