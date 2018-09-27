@@ -5,7 +5,6 @@ const employeeController = require('../../controllers/EmployeeController');
 router.route('/')
     .get(employeeController.findAll)
     .post(employeeController.create);
-
 // Matches with "/api/employee/clockIn/:id"
 router
     .route('/clockIn/:id')
@@ -14,5 +13,8 @@ router
 router
     .route('/clockOut/:id')
     .put(employeeController.clockOut);
+router
+    .route('/remove/:id')
+    .delete(employeeController.remove);
 
 module.exports = router;
