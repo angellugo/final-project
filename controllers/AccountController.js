@@ -1,12 +1,13 @@
-const User = require('../../models/user');
-const UserSession = require('../../models/usersession');
-const Company = require('../../models/company');
+const User = require('../models/user');
+const UserSession = require('../models/usersession');
+const Company = require('../models/company');
 
-module.exports = (app) => {
-  app.post('/api/account/newSignUp', (req, res) => {
-    const { body } = req;
-    const { companyAddress,email,adminFirstName,adminLastName,isManager,password } = body;
-    let { companyName } = body;
+// Defining methods for the booksController
+module.exports = {
+  signUp: function(req, res) {
+    const {body} = req;
+    const {companyAddress, email, adminFirstName, adminLastName, isManager, password} = body;
+    let {companyName} = body;
     // const email = req.body.email;
     // const companyAddress = req.body.companyAddress;
     // const adminFirstName = req.body.adminFirstName;
@@ -14,57 +15,56 @@ module.exports = (app) => {
     // const isManager = req.body.isManager;
     // const password = req.body.password;
 
-
     if (!companyName) {
       return res.send({
         success: false,
-        message: 'Error: Company Name cannot be blank!'
+        message: 'Error: Company Name cannot be blank!',
       });
     };
     if (!companyAddress) {
       return res.send({
         success: false,
-        message: 'Error: Company Address cannot be blank!'
+        message: 'Error: Company Address cannot be blank!',
       });
     };
     if (!adminFirstName) {
       return res.send({
         success: false,
-        message: 'Error: Admin First Name cannot be blank!'
+        message: 'Error: Admin First Name cannot be blank!',
       });
     };
     if (!adminLastName) {
       return res.send({
         success: false,
-        message: 'Error: Admin Last Name cannot be blank!'
+        message: 'Error: Admin Last Name cannot be blank!',
       });
     };
     if (!email) {
       return res.send({
         success: false,
-        message: 'Error: Email cannot be blank!'
+        message: 'Error: Email cannot be blank!',
       });
     };
     if (!password) {
       return res.send({
         success: false,
-        message: 'Error: Password cannot be blank!'
+        message: 'Error: Password cannot be blank!',
       });
     };
 
     companyName = companyName.toLowerCase();
     Company.find({
-      companyName: companyName
+      companyName: companyName,
     }, (err, previousCompany) => {
       if (err) {
         return res.send({
           success: false,
-          message: 'Error: Server error'
+          message: 'Error: Server error',
         });
       } else if (previousCompany.length > 0) {
         return res.send({
           success: false,
-          message: 'Error Company Account already created.'
+          message: 'Error Company Account already created.',
         });
       };
     });
@@ -82,21 +82,20 @@ module.exports = (app) => {
       if (err) {
         return res.send({
           success: false,
-          message: 'Error: Server error Account Not created'
+          message: 'Error: Server error Account Not created',
         });
       }
       return res.send({
         success: true,
-        message: 'Your Company is now Signed Up!'
+        message: 'Your Company is now Signed Up!',
 
       });
     });
-  });
-
-  app.post('/api/account/newEmployee', (req, res) => {
-    const { body} = req;
-    const { userName,firstName,lastName,isAdmin,isManager,password } = body;
-    let { email } = body;
+  },
+  newEmployee: function(req, res) {
+    const {body} = req;
+    const {userName, firstName, lastName, isAdmin, isManager, password} = body;
+    let {email} = body;
     // const userName = req.body.userName;
     // const firstName = req.body.firstName;
     // const lastName = req.body.lastName;
@@ -115,48 +114,48 @@ module.exports = (app) => {
     if (!userName) {
       return res.send({
         success: false,
-        message: 'Error: Username cannot be blank!'
+        message: 'Error: Username cannot be blank!',
       });
     };
     if (!firstName) {
       return res.send({
         success: false,
-        message: 'Error: First Name cannot be blank!'
+        message: 'Error: First Name cannot be blank!',
       });
     };
     if (!lastName) {
       return res.send({
         success: false,
-        message: 'Error: Last Name cannot be blank!'
+        message: 'Error: Last Name cannot be blank!',
       });
     };
     if (!email) {
       return res.send({
         success: false,
-        message: 'Error: Email cannot be blank!'
+        message: 'Error: Email cannot be blank!',
       });
     };
     if (!password) {
       return res.send({
         success: false,
-        message: 'Error: Password cannot be blank!'
+        message: 'Error: Password cannot be blank!',
       });
     };
 
     email = email.toLowerCase();
 
     User.find({
-      email: email
+      email: email,
     }, (err, users) => {
       if (err) {
         return res.send({
           success: false,
-          message: 'Error: Server error 123'
+          message: 'Error: Server error 123',
         });
       } else if (users.length > 0) {
         return res.send({
           success: false,
-          message: 'Error Account already created.'
+          message: 'Error Account already created.',
         });
       };
     });
@@ -174,21 +173,20 @@ module.exports = (app) => {
       if (err) {
         return res.send({
           success: false,
-          message: 'Error: Server error Account Not created'
+          message: 'Error: Server error Account Not created',
         });
       }
       return res.send({
         success: true,
-        message: 'New User Now Created!'
+        message: 'New User Now Created!',
 
       });
     });
-  });
-
-  app.post('/api/account/signIn', (req, res) => {
-      const { body } = req;
-      let { email } = body;
-      const { password } = body;
+  },
+  signIn: function(req, res) {
+    const {body} = req;
+    let {email} = body;
+    const {password} = body;
     // let email  = req.body.email;
     // const userName = req.body.userName;
     // const firstName = req.body.firstName;
@@ -200,30 +198,30 @@ module.exports = (app) => {
     if (!email) {
       return res.send({
         success: false,
-        message: 'Error: Email cannot be blank!'
+        message: 'Error: Email cannot be blank!',
       });
     };
     if (!password) {
       return res.send({
         success: false,
-        message: 'Error: Password cannot be blank!'
+        message: 'Error: Password cannot be blank!',
       });
     };
 
     email = email.toLowerCase();
 
     User.find({
-      email: email
+      email: email,
     }, (err, users) => {
       if (err) {
         return res.send({
           success: false,
-          message: 'Error: Server error 123'
+          message: 'Error: Server error 123',
         });
       } else if (users.length != 1) {
         return res.send({
           success: false,
-          message: 'Error Invalid'
+          message: 'Error Invalid',
         });
       };
 
@@ -231,7 +229,7 @@ module.exports = (app) => {
       if (!user.validPassword(password)) {
         return res.send({
           success: false,
-          message: 'Error Invalid Password or User Name'
+          message: 'Error Invalid Password or User Name',
         });
       };
       const userSession = new UserSession();
@@ -240,22 +238,20 @@ module.exports = (app) => {
         if (err) {
           return res.send({
             success: false,
-            message: 'Error: Server error'
+            message: 'Error: Server error',
           });
         }
         return res.send({
           success: true,
           message: 'Valid Sign-in',
-          token: doc.id
+          token: doc.id,
         });
       });
     });
-  });
-
-  app.get('/api/account/verify', (req, res) => {
-
-    const {query} =req;
-    const {token} =query;
+  },
+  verify: function(req, res) {
+    const {query} = req;
+    const {token} = query;
     // const token = req.query;
     // console.log({token1});
     // console.log({query});
@@ -269,47 +265,44 @@ module.exports = (app) => {
         console.log(err);
         return res.send({
           success: false,
-          message: 'Error: Servor Error123'
-        })
+          message: 'Error: Servor Error123',
+        });
       };
       if (sessions.length != 1) {
         return res.send({
           success: false,
-          message: 'Error: Invalid'
-        })
+          message: 'Error: Invalid',
+        });
       } else {
         return res.send({
           success: true,
-          message: 'Good'
-        })
+          message: 'Good',
+        });
       }
     });
-  });
-  
-  app.get('/api/account/logout', (req, res) => {
-
-    const { query } = req;
-    const { token } = query;
+  },
+  logout: function(req, res) {
+    const {query} = req;
+    const {token} = query;
 
     UserSession.findOneAndUpdate({
       _id: token,
       isDeleted: false,
-    },{
-      $set:{isDeleted: true}
-      }, null, (err, sessions) => {
+    }, {
+      $set: {isDeleted: true},
+    }, null, (err, sessions) => {
       if (err) {
         console.log(err);
         return res.send({
           success: false,
-          message: 'Error: Servor Error'
+          message: 'Error: Servor Error',
         });
       };
-         return res.send({
-          success: true,
-          message: 'Log Out Complete'
-        });
-      
+      return res.send({
+        success: true,
+        message: 'Log Out Complete',
+      });
     });
+  },
+};
 
-  });
-}
