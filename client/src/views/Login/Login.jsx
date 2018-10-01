@@ -46,7 +46,7 @@ function UserProfile(props) {
               <p className={classes.cardCategoryWhite}>Complete company profile, you will be added as an admin.</p>
             </CardHeader>
             <CardBody>
-              <form action="/" method="post">
+              <form action="http://localhost:3001/api/employee" method="post">
               <GridContainer>
                 <GridItem xs={12} sm={12} md={5}>
                   <CustomInput
@@ -55,6 +55,7 @@ function UserProfile(props) {
                     formControlProps={{
                       fullWidth: true
                     }}
+                    name="company"
                     
                   />
                 </GridItem>
@@ -65,6 +66,7 @@ function UserProfile(props) {
                     formControlProps={{
                       fullWidth: true
                     }}
+                    name="Username"
                   />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
@@ -74,6 +76,7 @@ function UserProfile(props) {
                     formControlProps={{
                       fullWidth: true
                     }}
+                    name="email"
                   />
                 </GridItem>
               </GridContainer>
@@ -85,6 +88,7 @@ function UserProfile(props) {
                     formControlProps={{
                       fullWidth: true
                     }}
+                    name="fName"
                   />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={6}>
@@ -94,6 +98,7 @@ function UserProfile(props) {
                     formControlProps={{
                       fullWidth: true
                     }}
+                    name="lName"
                   />
                 </GridItem>
               </GridContainer>
@@ -105,6 +110,7 @@ function UserProfile(props) {
                     formControlProps={{
                       fullWidth: true
                     }}
+                    name="city"
                   />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
@@ -114,6 +120,7 @@ function UserProfile(props) {
                     formControlProps={{
                       fullWidth: true
                     }}
+                    name="country"
                   />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
@@ -123,6 +130,7 @@ function UserProfile(props) {
                     formControlProps={{
                       fullWidth: true
                     }}
+                    name="zip"
                   />
                 </GridItem>
               </GridContainer>
@@ -131,7 +139,7 @@ function UserProfile(props) {
                   <InputLabel style={{ color: "#AAAAAA" }}>Company Brand Statement</InputLabel>
                   <CustomInput
                     labelText=""
-                    id="about-me"
+                    id="brandStatement"
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -139,6 +147,7 @@ function UserProfile(props) {
                       multiline: true,
                       rows: 2
                     }}
+                    name="brandStatement"
                   />
                 </GridItem>
               </GridContainer>
