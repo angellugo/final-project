@@ -1,6 +1,7 @@
 // @material-ui/icons
 import Dashboard from "@material-ui/icons/Dashboard";
 import Person from "@material-ui/icons/Person";
+import PersonAdd from "@material-ui/icons/PersonAdd"
 // import ContentPaste from "@material-ui/icons/ContentPaste";
 import LibraryBooks from "@material-ui/icons/LibraryBooks";
 import BubbleChart from "@material-ui/icons/BubbleChart";
@@ -16,8 +17,16 @@ import Icons from "../views/Icons/Icons.jsx";
 import Maps from "../views/Maps/Maps.jsx";
 import NotificationsPage from "../views/Notifications/Notifications.jsx";
 import UpgradeToPro from "../views/UpgradeToPro/UpgradeToPro.jsx";
+import LoginPage from "../views/Login/Login.jsx"
 
 const dashboardRoutes = [
+  {
+path: "/login",
+sidebarName: "Login",
+navbarName: "Login",
+icon: PersonAdd,
+component: LoginPage
+  },
   {
     path: "/dashboard",
     sidebarName: "Dashboard",
@@ -34,8 +43,8 @@ const dashboardRoutes = [
   },
   {
     path: "/table",
-    sidebarName: "Table List",
-    navbarName: "Table List",
+    sidebarName: "Employee Table",
+    navbarName: "Employee Table",
     icon: "content_paste",
     component: TableList
   },
@@ -74,7 +83,7 @@ const dashboardRoutes = [
     icon: Unarchive,
     component: UpgradeToPro
   },
-  { redirect: true, path: "/", to: "/dashboard", navbarName: "Redirect" }
+  { redirect: true, path: "/", to: "/login", navbarName: "Redirect" }
 ];
 
 export default dashboardRoutes;
