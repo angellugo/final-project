@@ -3,7 +3,6 @@ module.exports = {
     "parserOptions": {
         "ecmaVersion": 6,
         "sourceType": "module",
-        "parser": "babel-eslint"
     },
     "rules": {
         "new-cap": ["error", { "capIsNewExceptions": ["Router"] }]
