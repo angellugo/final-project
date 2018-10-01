@@ -46,6 +46,7 @@ function UserProfile(props) {
               <p className={classes.cardCategoryWhite}>Complete company profile, you will be added as an admin.</p>
             </CardHeader>
             <CardBody>
+              <form action="/" method="post">
               <GridContainer>
                 <GridItem xs={12} sm={12} md={5}>
                   <CustomInput
@@ -141,10 +142,12 @@ function UserProfile(props) {
                   />
                 </GridItem>
               </GridContainer>
-            </CardBody>
+            
             <CardFooter>
-              <Button color="primary">Add Company</Button>
+              <Button color="primary" type="submit" onClick={console.log(this)}>Add Company</Button>
             </CardFooter>
+            </form>
+            </CardBody>
           </Card>
         </GridItem>
         <GridItem xs={12} sm={12} md={4}>
