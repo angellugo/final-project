@@ -6,6 +6,7 @@ const app = express();
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const logger = require('morgan');
 
 mongoose.connect('mongodb://localhost/project3LocalDB');
 
@@ -15,6 +16,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.use(cookieParser());
+app.use(logger('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
