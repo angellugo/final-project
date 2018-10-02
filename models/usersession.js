@@ -3,16 +3,16 @@ const mongoose = require('mongoose');
 const usersessionSchema = new mongoose.Schema({
   userID: {
     type: String,
-    default: ""
+    default: '',
   },
   timestamp: {
     type: Date,
-    default: Date.now()
+    default: Date.now(),
   },
   isDeleted: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 });
 
 module.exports = mongoose.model('usersession', usersessionSchema);
