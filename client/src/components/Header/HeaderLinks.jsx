@@ -83,7 +83,7 @@ class HeaderLinks extends React.Component {
             className={classes.buttonLink}
           >
             <Notifications className={classes.icons} />
-            <span className={classes.notifications}>5</span>
+            {/* <span className={classes.notifications}>5</span> */}
             <Hidden mdUp implementation="css">
               <p onClick={this.handleClick} className={classes.linkText}>
                 Notification
@@ -110,7 +110,7 @@ class HeaderLinks extends React.Component {
                     placement === "bottom" ? "center top" : "center bottom"
                 }}
               >
-                <Paper>
+                {/* <Paper>
                   <ClickAwayListener onClickAway={this.handleClose}>
                     <MenuList role="menu">
                       <MenuItem
@@ -145,7 +145,7 @@ class HeaderLinks extends React.Component {
                       </MenuItem>
                     </MenuList>
                   </ClickAwayListener>
-                </Paper>
+                </Paper> */}
               </Grow>
             )}
           </Poppers>
