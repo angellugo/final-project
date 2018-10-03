@@ -6,7 +6,8 @@ const Company = require('../models/company');
 module.exports = {
   signUp: function(req, res) {
     const {body} = req;
-    const {companyAddress, email, adminFirstName, adminLastName, isManager, password} = body;
+    const {companyAddress, email, adminFirstName, adminLastName,
+      isManager, password} = body;
     let {companyName} = body;
     // const email = req.body.email;
     // const companyAddress = req.body.companyAddress;
