@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -12,8 +12,9 @@ import CardHeader from "../../components/Card/CardHeader.jsx";
 import CardAvatar from "../../components/Card/CardAvatar.jsx";
 import CardBody from "../../components/Card/CardBody.jsx";
 import CardFooter from "../../components/Card/CardFooter.jsx";
+import axios from "axios"
 
-import avatar from "../../assets/img/faces/marc.jpg";
+// import avatar from "../../assets/img/faces/marc.jpg";
 
 const styles = {
   cardCategoryWhite: {
@@ -33,9 +34,43 @@ const styles = {
     textDecoration: "none"
   }
 };
+class Login extends Component {
+  state = {
+    company: "",
+    username: "",
+    email: "",
+    adminFirstName: "",
+    adminLastName: "",
+    city: "",
+    country:"",
+    postalCode: "",
+    brand: "",
+    password: "",
+    passwordMatch: ""
+  };
 
-function UserProfile(props) {
-  const { classes } = props;
+  handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  };
+
+  handleFormSubmit = event => {
+    event.preventDefault();
+    
+    axios.post('/api/account/newSignUp', 
+    this.state
+  )
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+  };
+render(){
+  const { classes } = this.props;
   return (
     <div>
       <GridContainer>
@@ -46,7 +81,7 @@ function UserProfile(props) {
               <p className={classes.cardCategoryWhite}>Complete company profile, you will be added as an admin.</p>
             </CardHeader>
             <CardBody>
-              <form action="http://localhost:3001/api/employee" method="post">
+              <form>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={5}>
                   <CustomInput
@@ -55,6 +90,8 @@ function UserProfile(props) {
                     formControlProps={{
                       fullWidth: true
                     }}
+                    value={this.state.company}
+                    onChange={this.handleInputChange}
                     name="company"
                     
                   />
@@ -66,16 +103,20 @@ function UserProfile(props) {
                     formControlProps={{
                       fullWidth: true
                     }}
-                    name="Username"
+                    value={this.state.username}
+                    onChange={this.handleInputChange}
+                    name="username"
                   />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
                     labelText="Email address"
-                    id="email-address"
+                    id="email"
                     formControlProps={{
                       fullWidth: true
                     }}
+                    value={this.state.email}
+                    onChange={this.handleInputChange}
                     name="email"
                   />
                 </GridItem>
@@ -88,7 +129,9 @@ function UserProfile(props) {
                     formControlProps={{
                       fullWidth: true
                     }}
-                    name="fName"
+                    value={this.state.adminFirstName}
+                    onChange={this.handleInputChange}
+                    name="adminFirstName"
                   />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={6}>
@@ -98,7 +141,9 @@ function UserProfile(props) {
                     formControlProps={{
                       fullWidth: true
                     }}
-                    name="lName"
+                    value={this.state.adminLastName}
+                    onChange={this.handleInputChange}
+                    name="adminLastName"
                   />
                 </GridItem>
               </GridContainer>
@@ -110,6 +155,8 @@ function UserProfile(props) {
                     formControlProps={{
                       fullWidth: true
                     }}
+                    value={this.state.city}
+                    onChange={this.handleInputChange}
                     name="city"
                   />
                 </GridItem>
@@ -120,6 +167,8 @@ function UserProfile(props) {
                     formControlProps={{
                       fullWidth: true
                     }}
+                    value={this.state.country}
+                    onChange={this.handleInputChange}
                     name="country"
                   />
                 </GridItem>
@@ -130,7 +179,9 @@ function UserProfile(props) {
                     formControlProps={{
                       fullWidth: true
                     }}
-                    name="zip"
+                    value={this.state.postalCode}
+                    onChange={this.handleInputChange}
+                    name="postalCode"
                   />
                 </GridItem>
               </GridContainer>
@@ -147,13 +198,46 @@ function UserProfile(props) {
                       multiline: true,
                       rows: 2
                     }}
-                    name="brandStatement"
+                    value={this.state.brand}
+                    onChange={this.handleInputChange}
+                    name="brand"
                   />
                 </GridItem>
               </GridContainer>
-            
+              <GridContainer>
+              <GridItem xs={12} sm={12} md={4}>
+              <CustomInput
+                    labelText="Password"
+                    type="password"
+                    id="pass"
+                    name="password"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                    value={this.state.password}
+                    onChange={this.handleInputChange}
+                  />
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                    labelText="Retype Password"
+                    type="password"
+                    id="repass"
+                    name="passwordMatch"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                    value={this.state.passwordMatch}
+                    onChange={this.handleInputChange}
+                  />
+            </GridItem>
+            </GridContainer>
             <CardFooter>
-              <Button color="primary" type="submit" onClick={console.log(this)}>Add Company</Button>
+              <Button 
+              color="primary" 
+              type="submit" 
+              onClick={this.handleFormSubmit}>
+              Add Company</Button>
             </CardFooter>
             </form>
             </CardBody>
@@ -178,6 +262,7 @@ function UserProfile(props) {
                   />
                   <CustomInput
                     labelText="Password"
+                    type="passwords"
                     id="pass"
                     formControlProps={{
                       fullWidth: true
@@ -195,5 +280,6 @@ function UserProfile(props) {
     </div>
   );
 }
+}
 
-export default withStyles(styles)(UserProfile);
+export default withStyles(styles)(Login);

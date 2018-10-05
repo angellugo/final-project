@@ -7,7 +7,8 @@ const saltRounds = 10;
 // Defining methods for the booksController
 module.exports = {
   signUp: function(req, res) {
-    req.checkBody('companyName', 'Company field cannot be empty.').notEmpty();
+    console.log(req.body);
+    req.checkBody('company', 'Company field cannot be empty.').notEmpty();
     req.checkBody('username', 'Username field cannot be empty.').notEmpty();
     req.checkBody('username', 'Username must be between 4-15 characters long.').len(4, 15);
     req.checkBody('email', 'The email you entered is invalid, please try again.').isEmail();
@@ -28,7 +29,7 @@ module.exports = {
     if (errors) {
       console.log(JSON.stringify(errors));
 
-      let companyNameErrors = [];
+      let companyErrors = [];
       let usernameErrors = [];
       let emailErrors = [];
       let adminFirstNameErrors = [];
@@ -42,8 +43,8 @@ module.exports = {
 
       errors.forEach(function(element) {
         switch (element.param) {
-          case 'companyName':
-            companyNameErrors.push(element);
+          case 'company':
+            companyErrors.push(element);
             break;
           case 'username':
             usernameErrors.push(element);
@@ -79,7 +80,7 @@ module.exports = {
       });
 
       res.send({
-        companyNameErrors: companyNameErrors,
+        companyErrors: companyErrors,
         usernameErrors: usernameErrors,
         emailErrors: emailErrors,
         adminFirstNameErrors: adminFirstNameErrors,
@@ -96,7 +97,7 @@ module.exports = {
         if (err) throw err;
 
         Company.create({
-          companyName: req.body.companyName,
+          company: req.body.company,
           username: req.body.username,
           email: req.body.email,
           adminFirstName: req.body.adminFirstName,
@@ -125,7 +126,7 @@ module.exports = {
 const {body} = req;
     const {companyAddress, email, adminFirstName, adminLastName,
       isManager, password} = body;
-    let {companyName} = body;
+    let {company} = body;
     // const email = req.body.email;
     // const companyAddress = req.body.companyAddress;
     // const adminFirstName = req.body.adminFirstName;
@@ -133,7 +134,7 @@ const {body} = req;
     // const isManager = req.body.isManager;
     // const password = req.body.password;
 
-    if (!companyName) {
+    if (!company) {
       return res.send({
         success: false,
         message: 'Error: Company Name cannot be blank!',
@@ -170,9 +171,9 @@ const {body} = req;
       });
     };
 
-    companyName = companyName.toLowerCase();
+    company = company.toLowerCase();
     Company.find({
-      companyName: companyName,
+      company: company,
     }, (err, previousCompany) => {
       if (err) {
         return res.send({
@@ -189,7 +190,7 @@ const {body} = req;
 
     const newCompany = new Company();
     newCompany.email = email;
-    newCompany.companyName = companyName;
+    newCompany.company = company;
     newCompany.companyAddress = companyAddress;
     newCompany.adminFirstName = adminFirstName;
     newCompany.adminLastName = adminLastName;
