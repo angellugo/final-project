@@ -5,6 +5,7 @@ module.exports = {
         "sourceType": "module",
     },
     "rules": {
-        "new-cap": ["error", { "capIsNewExceptions": ["Router"] }]
+        "new-cap": ["error", { "capIsNewExceptions": ["Router"] }],
+        "max-len": ["error", { "code": 500 }]
     }
 };
