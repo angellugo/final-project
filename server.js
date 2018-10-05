@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
+const expressValidator = require('express-validator');
 
 mongoose.connect('mongodb://localhost/project3LocalDB');
 
@@ -18,6 +19,7 @@ app.use(cookieParser());
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+app.use(expressValidator());
 
 app.use(routes);
 // Send every request to the React app
